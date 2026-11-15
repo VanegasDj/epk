@@ -8,7 +8,7 @@
   <!-- ====== Vista previa al compartir por WhatsApp/Instagram (Open Graph) ====== -->
   <meta property="og:type" content="profile">
   <meta property="og:title" content="VANEGAS DJ — Sets con curva de energía">
-  <meta property="og:description" content="DJ en Medellín. Deep house con jazz y funky — atmósferas para rooftops, lounges y eventos privados. Visuales reactivas en pantalla. Cotiza tu fecha por WhatsApp.">
+  <meta property="og:description" content="DJ en Medellín. Deep house con jazz y funky — atmósferas para rooftops, lounges y eventos privados. Sets de hasta 5 horas. Cotiza tu fecha por WhatsApp.">
   <meta property="og:image" content="https://vanegasdj.github.io/epk/foto.jpg">
   <meta property="og:image:alt" content="Vanegas DJ — DJ de Deep House en Medellín">
   <meta property="og:url" content="https://vanegasdj.github.io/epk/">
@@ -34,144 +34,323 @@
     ]
   }
   </script>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23101018'/%3E%3Ccircle cx='50' cy='46' r='24' fill='%23ffd166'/%3E%3Ctext x='50' y='55' font-size='30' text-anchor='middle' fill='%23101018' font-family='Arial Black'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000000'/%3E%3Ccircle cx='50' cy='46' r='24' fill='%2320cd17'/%3E%3Ctext x='50' y='55' font-size='30' text-anchor='middle' fill='%23000000' font-family='Arial Black'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
+    /* ====== TEMA (estilo Mochakk: negro puro + acento neón) ====== */
     :root {
-      --negro: #050508; --panel: #101018; --oro: #ffd166; --oro2: #ffb347;
-      --texto: #e8e8e0; --gris: #a8a89e; --ok: #25d366;
+      --bg: #000; --panel: #0a0a0a;
+      --acento: #20cd17; --acento-rgb: 32, 205, 23;
+      --texto: #ffffff; --gris: #a3a3a3;
+      --borde: rgba(255,255,255,.75); --borde-suave: rgba(255,255,255,.16);
+      --wa1: #2ee173; --wa2: #25d366;
     }
+    html.tema-azul {
+      --acento: #2ab8ff; --acento-rgb: 42, 184, 255;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: var(--negro); color: var(--texto); line-height: 1.6; padding: 16px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg); color: var(--texto); line-height: 1.6; padding: 16px;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 860px; margin: 0 auto; }
+    .container { max-width: 720px; margin: 0 auto; }
 
-    header { text-align: center; padding: 44px 0 10px; }
-    h1 {
-      font-size: clamp(2.4rem, 9vw, 3.8rem); letter-spacing: 8px; text-transform: uppercase;
-      background: linear-gradient(180deg, #fff 20%, var(--oro) 90%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    /* ====== FONDO NOCTURNO (tu foto de cabina difuminada + luces) ====== */
+    .fondo {
+      position: fixed; inset: 0; z-index: -2;
+      background: url('https://vanegasdj.github.io/epk/foto.jpg') center 18% / cover no-repeat;
+      filter: blur(16px) brightness(.42) saturate(1.3);
+      transform: scale(1.08);
     }
-    .frase { color: var(--oro); letter-spacing: 3px; font-size: 1rem; margin-top: 10px; text-transform: uppercase; }
-    .sub2 { color: var(--gris); letter-spacing: 2px; font-size: .8rem; margin-top: 8px; text-transform: uppercase; }
+    .fondo-velo {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse at 50% -8%, rgba(var(--acento-rgb), .09), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.74) 0%, rgba(0,0,0,.83) 45%, rgba(0,0,0,.9) 100%);
+    }
+    .luces { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .luces i {
+      position: absolute; border-radius: 50%; display: block;
+      background: radial-gradient(circle, rgba(var(--acento-rgb), .5), transparent 70%);
+      animation: latir 5.5s ease-in-out infinite;
+    }
+    .luces i:nth-child(1) { width: 90px; height: 90px; left: 6%; top: 12%; }
+    .luces i:nth-child(2) { width: 58px; height: 58px; right: 10%; top: 24%; animation-delay: 1.3s; }
+    .luces i:nth-child(3) { width: 130px; height: 130px; left: 10%; bottom: 16%; animation-delay: 2.2s; }
+    .luces i:nth-child(4) { width: 70px; height: 70px; right: 7%; bottom: 24%; animation-delay: 3s; }
+    .luces i:nth-child(5) { width: 44px; height: 44px; left: 47%; top: 5%; animation-delay: 3.7s; }
+    @keyframes latir { 0%, 100% { opacity: .3 } 50% { opacity: .85 } }
+    @media (prefers-reduced-motion: reduce) { .luces i { animation: none; opacity: .45 } }
+    @media print { .fondo, .fondo-velo, .luces { display: none !important } }
 
-    .hero {
-      display: block; margin: 26px auto 8px; border-radius: 16px;
-      border: 1px solid rgba(255,209,102,.35);
-      max-width: 100%; max-height: min(64vh, 600px); width: auto; height: auto; object-fit: contain;
-      box-shadow: 0 0 60px rgba(255,209,102,.14);
+    /* ====== BARRA DE NÚMEROS (prueba social) ====== */
+    .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0 2px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat .num { color: var(--acento); font-weight: 900; font-size: 1.3rem; letter-spacing: .5px; }
+    .stat .lbl { color: var(--gris); font-size: .62rem; text-transform: uppercase; letter-spacing: 1.5px; }
+
+    /* ====== EMBEDS (estilo Mochakk: video arriba) ====== */
+    #yt-slot iframe {
+      width: 100%; aspect-ratio: 16 / 9; height: auto; display: block;
+      border-radius: 14px; border: 1px solid var(--borde-suave);
     }
-    .hero-marco { position: relative; display: block; width: fit-content; margin: 26px auto 8px; }
-    .sol-hero {
-      position: absolute; right: -14px; top: -14px; width: 46px; height: 46px; border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, #ffe29a, var(--oro) 60%, var(--oro2));
-      box-shadow: 0 0 34px rgba(255,209,102,.55);
+
+    /* ====== EQUIPO CON FOTO ====== */
+    .equipo {
+      display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; align-items: center;
+      max-width: 640px; margin: 8px auto 0;
     }
+    .equipo img {
+      width: 100%; display: block; border-radius: 14px; border: 2px solid var(--borde);
+      box-shadow: 0 0 30px rgba(var(--acento-rgb), .12);
+    }
+    .equipo .rider { margin: 0; }
+    .equipo-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; justify-content: center; }
+    @media (max-width: 620px) { .equipo { grid-template-columns: 1fr; } }
+
+    /* ====== PLANES / PRECIOS ====== */
+    .planes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 6px; }
+    .plan {
+      background: rgba(0, 0, 0, .55); border: 2px solid var(--borde); border-radius: 16px;
+      padding: 20px 14px 16px; text-align: center; transition: all .15s;
+    }
+    .plan:hover { border-color: var(--acento); box-shadow: 0 0 26px rgba(var(--acento-rgb), .22); transform: translateY(-3px); }
+    .plan h3 { font-size: .82rem; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; font-weight: 700; }
+    .plan .precio { color: var(--acento); font-weight: 900; font-size: 1.08rem; margin: 10px 0 6px; }
+    .plan .desde { display: block; font-size: .58rem; color: var(--gris); text-transform: uppercase; letter-spacing: 1.5px; }
+    .plan p { font-size: .74rem; color: var(--gris); margin: 4px 0 0; text-align: center; }
+
+    /* ====== GÉNEROS & OCASIONES ====== */
+    .generos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 6px; }
+    .genero {
+      background: rgba(0, 0, 0, .5); border: 1px solid var(--borde-suave); border-radius: 12px;
+      padding: 14px 10px; text-align: center; transition: all .15s;
+    }
+    .genero:hover { border-color: var(--acento); box-shadow: 0 0 20px rgba(var(--acento-rgb), .18); }
+    .genero .g-e { font-size: 1.3rem; }
+    .genero .g-n { color: #fff; font-size: .76rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+    .genero .g-o { color: var(--gris); font-size: .66rem; margin-top: 2px; }
+
+    /* ====== CABECERA ====== */
+    header { text-align: center; padding: 46px 0 6px; }
+    .marca {
+      font-size: clamp(2.3rem, 9vw, 3.8rem); font-weight: 900; letter-spacing: 8px;
+      text-transform: uppercase; color: #fff; line-height: 1.15;
+      text-shadow: 0 0 30px rgba(var(--acento-rgb), .35);
+    }
+    .verificado {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: .5em; height: .5em; margin-left: .18em; border-radius: 50%;
+      background: var(--acento); color: #000; font-size: .32em; font-weight: 900;
+      vertical-align: super; letter-spacing: 0;
+    }
+    .frase { color: var(--acento); letter-spacing: 3px; font-size: 1rem; margin-top: 12px; text-transform: uppercase; font-weight: 700; }
+    .sub2 { color: var(--gris); letter-spacing: 2px; font-size: .78rem; margin-top: 8px; text-transform: uppercase; }
+
+    /* ====== FILA DE ICONOS (estilo Mochakk) ====== */
+    .iconos-fila { display: flex; gap: 22px; justify-content: center; margin: 20px 0 4px; }
+    .iconos-fila a { color: var(--acento); transition: all .15s; display: inline-flex; }
+    .iconos-fila a:hover { color: #fff; transform: translateY(-2px); }
+    .iconos-fila svg { width: 23px; height: 23px; fill: currentColor; }
 
     .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 8px; }
     .badge {
-      border: 1px solid rgba(255,209,102,.4); color: var(--oro); border-radius: 999px;
-      padding: 5px 14px; font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase;
+      border: 1px solid rgba(var(--acento-rgb), .55); color: var(--acento); border-radius: 999px;
+      padding: 5px 14px; font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
     }
 
-    section {
-      background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.07);
-      border-radius: 14px; padding: 26px 22px; margin: 22px 0;
+    /* ====== HERO ====== */
+    .hero-marco { position: relative; display: block; width: fit-content; margin: 24px auto 0; max-width: 100%; }
+    .hero {
+      display: block; margin: 0 auto; border-radius: 16px;
+      border: 1px solid rgba(var(--acento-rgb), .4);
+      max-width: 100%; max-height: min(62vh, 580px); width: auto; height: auto; object-fit: contain;
+      box-shadow: 0 0 70px rgba(var(--acento-rgb), .16);
     }
+    .brillo-hero {
+      position: absolute; right: -7px; top: -7px; width: 15px; height: 15px; border-radius: 50%;
+      background: var(--acento); box-shadow: 0 0 22px rgba(var(--acento-rgb), .9), 0 0 44px rgba(var(--acento-rgb), .5);
+    }
+
+    /* ====== SECCIONES (flujo negro, separadores finos) ====== */
+    section { padding: 36px 0 10px; border-top: 1px solid var(--borde-suave); margin-top: 30px; }
+    section:first-of-type { border-top: none; }
     h2 {
-      font-size: 1rem; color: var(--oro); text-transform: uppercase; letter-spacing: 2px;
-      margin-bottom: 16px; border-bottom: 1px solid rgba(255,209,102,.25); padding-bottom: 8px;
+      font-size: .95rem; color: var(--acento); text-transform: uppercase; letter-spacing: 3px;
+      text-align: center; font-weight: 700;
     }
-    p { font-size: .95rem; color: var(--gris); margin-bottom: 12px; }
+    h2::after {
+      content: ""; display: block; width: 44px; height: 3px; border-radius: 2px;
+      background: var(--acento); margin: 10px auto 0;
+      box-shadow: 0 0 12px rgba(var(--acento-rgb), .8);
+    }
+    section > p { font-size: .93rem; color: var(--gris); margin: 16px 0 12px; text-align: center; }
     b strong, strong { color: var(--texto); }
 
-    /* ===== formatos ===== */
-    .formatos { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-    .formato { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; }
-    .formato img { width: 100%; display: block; }
-    .formato .cuerpo { padding: 14px 16px 16px; }
-    .formato h3 { color: #fff; font-size: .95rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-    .formato p { font-size: .84rem; margin-bottom: 0; }
+    /* ====== BOTONES ESTILO MOCHAKK (negro + borde blanco) ====== */
+    .btn-moka {
+      display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+      background: #000; border: 2px solid var(--borde); border-radius: 14px;
+      padding: 15px 18px; color: #fff; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.6px; text-align: center; text-decoration: none; font-size: .85rem;
+      transition: all .15s;
+    }
+    .btn-moka:hover {
+      background: var(--acento); border-color: var(--acento); color: #000;
+      box-shadow: 0 0 28px rgba(var(--acento-rgb), .35);
+    }
+    .btn-moka small { font-weight: 400; letter-spacing: .5px; text-transform: none; opacity: .8; }
+    .btn-moka svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+    .fila-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    @media (max-width: 560px) { .fila-btns { grid-template-columns: 1fr; } }
 
-    /* ===== curva de energía ===== */
-    .fases { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 18px 0 8px; }
-    .fase { text-align: center; padding: 12px 4px; border-radius: 10px; background: rgba(255,209,102,.05); border: 1px solid rgba(255,209,102,.18); }
+    /* ====== FORMATOS ====== */
+    .formatos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .formato {
+      background: #000; border: 2px solid var(--borde); border-radius: 16px; overflow: hidden;
+      transition: all .15s;
+    }
+    .formato:hover {
+      border-color: var(--acento); box-shadow: 0 0 26px rgba(var(--acento-rgb), .22);
+      transform: translateY(-3px);
+    }
+    .formato img { width: 100%; display: block; }
+    .formato .cuerpo { padding: 15px 16px 17px; }
+    .formato h3 { color: #fff; font-size: .9rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; font-weight: 700; }
+    .formato p { font-size: .82rem; color: var(--gris); margin-bottom: 0; text-align: left; }
+
+    .cifra { color: var(--acento); font-weight: 800; }
+
+    /* ====== CURVA DE ENERGÍA ====== */
+    .fases { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 20px 0 8px; }
+    .fase {
+      text-align: center; padding: 13px 4px; border-radius: 12px;
+      background: rgba(var(--acento-rgb), .045); border: 1px solid rgba(var(--acento-rgb), .3);
+    }
     .fase .hora { font-size: 1.2rem; }
-    .fase .n { color: var(--oro); font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; }
-    .fase .d { color: var(--gris); font-size: .68rem; }
+    .fase .n { color: var(--acento); font-size: .66rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+    .fase .d { color: var(--gris); font-size: .66rem; }
     .fase-1 { opacity:.55 } .fase-2 { opacity:.7 } .fase-3 { opacity:.85 } .fase-4 { opacity:1 } .fase-5 { opacity:.8 }
     @media (max-width: 640px) { .fases { grid-template-columns: repeat(2, 1fr); } .fase:last-child { grid-column: span 2; } }
 
-    .cifra { color: var(--oro); font-weight: 800; }
+    /* ====== ESCUCHA ====== */
+    .embeds { display: grid; gap: 14px; margin-top: 4px; }
+    .embeds iframe { width: 100%; border-radius: 14px; border: 1px solid var(--borde-suave); }
+    #yt-slot .btn-moka { padding: 18px 20px; }
+    #yt-slot .btn-moka span.grande { font-size: 1.6rem; color: var(--acento); }
 
-    /* ===== botones ===== */
+    /* ====== REDES ====== */
+    .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .social-grid .btn-moka { padding: 13px; }
+
+    /* ====== RIDER ====== */
+    ul.rider { list-style: none; max-width: 560px; margin: 6px auto 0; }
+    ul.rider li {
+      padding: 9px 0 9px 26px; position: relative; color: var(--gris); font-size: .9rem;
+      border-bottom: 1px dashed var(--borde-suave);
+    }
+    ul.rider li:last-child { border-bottom: none; }
+    ul.rider li::before { content: "▸"; position: absolute; left: 0; color: var(--acento); font-weight: 900; }
+    ul.rider li strong { color: var(--texto); }
+
+    .nota { font-size: .76rem; color: #6f6f6f; margin-top: 10px; text-align: center; }
+    .nota a { color: var(--acento); text-decoration: none; font-weight: 500; }
+
+    /* ====== WHATSAPP CTA ====== */
     .btn-wa {
       display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
-      background: linear-gradient(180deg, #2ee173, var(--ok)); color: #04150a; font-weight: 800;
-      text-align: center; padding: 16px; border-radius: 12px; text-decoration: none;
+      background: linear-gradient(180deg, var(--wa1), var(--wa2)); color: #04150a; font-weight: 900;
+      text-align: center; padding: 16px; border-radius: 14px; text-decoration: none;
       text-transform: uppercase; letter-spacing: 2px; font-size: .95rem; margin-top: 6px;
-      box-shadow: 0 10px 34px rgba(37,211,102,.25); border: none; cursor: pointer;
+      box-shadow: 0 10px 34px rgba(37, 211, 102, .3); transition: all .15s;
     }
-    .btn-wa:hover { opacity: .92; }
-    .btn-oro {
-      display: block; width: 100%; background: linear-gradient(180deg, #ffe29a, var(--oro));
-      color: #201a05; font-weight: 800; text-align: center; padding: 14px; border-radius: 12px;
-      text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: .85rem;
-    }
-    .fila-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-    @media (max-width: 560px) { .fila-btns { grid-template-columns: 1fr; } }
+    .btn-wa:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-wa svg { width: 22px; height: 22px; fill: currentColor; }
 
-    .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-    .social-btn {
-      display: block; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12);
-      border-radius: 10px; padding: 12px; text-align: center; color: #fff; text-decoration: none;
-      font-weight: bold; font-size: .85rem; transition: all .2s;
-    }
-    .social-btn:hover { background: var(--oro); color: #201a05; border-color: var(--oro); }
-
-    .embeds { display: grid; gap: 16px; }
-    .embeds iframe { width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); }
-
-    ul.rider { list-style: none; }
-    ul.rider li { padding: 8px 0 8px 28px; position: relative; color: var(--gris); font-size: .92rem;
-                  border-bottom: 1px dashed rgba(255,255,255,.06); }
-    ul.rider li::before { content: "🎧"; position: absolute; left: 0; }
-
-    .nota { font-size: .76rem; color: #6d6d64; margin-top: 8px; }
-    footer { text-align: center; color: #5a5a50; font-size: .72rem; padding: 28px 0 14px;
+    footer { text-align: center; color: #636363; font-size: .7rem; padding: 30px 0 16px;
              letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ====== SELECTOR DE TEMA (solo pa'la vista previa) ====== */
+    .tema-switch {
+      position: fixed; bottom: 14px; right: 14px; z-index: 50;
+      display: flex; gap: 4px; align-items: center;
+      background: rgba(0,0,0,.88); border: 1px solid var(--borde-suave); border-radius: 999px; padding: 5px;
+      backdrop-filter: blur(6px);
+    }
+    .tema-switch span { font-size: .62rem; color: var(--gris); text-transform: uppercase; letter-spacing: 1px; padding: 0 4px 0 8px; }
+    .tema-switch button {
+      padding: 6px 13px; border-radius: 999px; border: none; cursor: pointer;
+      background: transparent; color: var(--gris); font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; transition: all .15s; font-family: inherit;
+    }
+    .tema-switch button.activo { background: var(--acento); color: #000; }
 
     @media print {
       body { background: #fff; color: #000; }
-      section { border-color: #ccc; background: #fff; }
-      .no-print { display: none; }
+      section { border-color: #ccc; }
+      .no-print, .tema-switch { display: none !important; }
       p, td, li { color: #222; }
     }
   </style>
 </head>
 <body>
+
+<!-- Fondo nocturno: tu cabina difuminada + velo + luces que respiran -->
+<div class="fondo"></div>
+<div class="fondo-velo"></div>
+<div class="luces" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
 <div class="container">
 
   <header>
-    <h1>Vanegas DJ</h1>
+    <div class="marca">Vanegas DJ<span class="verificado">✓</span></div>
     <div class="frase">Sets con curva de energía</div>
     <div class="sub2">Rooftops &amp; Lounges — Medellín · Bello, CO</div>
+
+    <div class="iconos-fila">
+      <a href="https://www.instagram.com/vanegasdj.co/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+      <a href="https://www.tiktok.com/@vanegasdj" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+      <a href="https://www.youtube.com/@VanegasDj" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      <a href="https://soundcloud.com/vanegasdjco" target="_blank" rel="noopener" aria-label="SoundCloud" title="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.999 14.165c-.052 1.796-1.612 3.169-3.4 3.169h-8.18a.68.68 0 0 1-.675-.683V7.862a.747.747 0 0 1 .452-.724s.75-.513 2.333-.513a5.364 5.364 0 0 1 2.763.755 5.433 5.433 0 0 1 2.57 3.54c.282-.08.574-.121.868-.12.884 0 1.73.358 2.347.992s.948 1.49.922 2.373ZM10.721 8.421c.247 2.98.427 5.697 0 8.672a.264.264 0 0 1-.53 0c-.395-2.946-.22-5.718 0-8.672a.264.264 0 0 1 .53 0ZM9.072 9.448c.285 2.659.37 4.986-.006 7.655a.277.277 0 0 1-.55 0c-.331-2.63-.256-5.02 0-7.655a.277.277 0 0 1 .556 0Zm-1.663-.257c.27 2.726.39 5.171 0 7.904a.266.266 0 0 1-.532 0c-.38-2.69-.257-5.21 0-7.904a.266.266 0 0 1 .532 0Zm-1.647.77a26.108 26.108 0 0 1-.008 7.147.272.272 0 0 1-.542 0 27.955 27.955 0 0 1 0-7.147.275.275 0 0 1 .55 0Zm-1.67 1.769c.421 1.865.228 3.5-.029 5.388a.257.257 0 0 1-.514 0c-.21-1.858-.398-3.549 0-5.389a.272.272 0 0 1 .543 0Zm-1.655-.273c.388 1.897.26 3.508-.01 5.412-.026.28-.514.283-.54 0-.244-1.878-.347-3.54-.01-5.412a.283.283 0 0 1 .56 0Zm-1.668.911c.4 1.268.257 2.292-.026 3.572a.257.257 0 0 1-.514 0c-.241-1.262-.354-2.312-.023-3.572a.283.283 0 0 1 .563 0Z"/></svg></a>
+      <a href="https://wa.me/573008543156" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+    </div>
+
     <div class="badges">
       <span class="badge">Deep House · Luxury</span>
       <span class="badge">Rooftops</span>
       <span class="badge">Lounges</span>
       <span class="badge">Eventos privados</span>
-      <span class="badge">Visuales en pantalla</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">3.300+</div><div class="lbl">Reproducciones</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Sets en vivo</div></div>
+      <div class="stat"><div class="num">126</div><div class="lbl">BPM máx — siempre elegante</div></div>
     </div>
   </header>
 
   <div class="hero-marco">
-    <img class="hero" id="heroImg" src="foto.jpg" alt="Vanegas DJ — DJ de Deep House en Medellín">
-    <div class="sol-hero"></div>
+    <img class="hero" id="heroImg" src="https://vanegasdj.github.io/epk/foto.jpg" alt="Vanegas DJ — DJ de Deep House en Medellín">
+    <div class="brillo-hero"></div>
   </div>
+
+  <!-- ====== ESCUCHA (arriba, como Mochakk: primero el sonido) ====== -->
+  <section>
+    <h2>El set que más suena</h2>
+    <p>Sets de rooftop con curva de energía — más de <strong>3.300 reproducciones</strong> en YouTube.
+       Este es el favorito del público:</p>
+    <div class="embeds">
+      <div id="yt-slot"></div>
+      <div id="sc-marco"></div>
+    </div>
+    <p class="nota">También en <a href="https://soundcloud.com/vanegasdjco" target="_blank" rel="noopener">SoundCloud</a>
+      y <a href="https://www.youtube.com/@VanegasDj" target="_blank" rel="noopener">YouTube @VanegasDj</a>.</p>
+  </section>
 
   <!-- ====== LOS 3 FORMATOS ====== -->
   <section>
@@ -180,31 +359,45 @@
        a cualquier hora, sin cortes bruscos ni subidas de volumen que espanten al cliente.</p>
     <div class="formatos">
       <div class="formato">
-        <img src="formato-lounge.jpg" alt="Lounge &amp; Cena — jazz, funky, deep chill">
+        <img src="https://vanegasdj.github.io/epk/formato-lounge.jpg" alt="Lounge &amp; Cena — jazz, funky, deep chill">
         <div class="cuerpo">
-          <h3>🌅 Lounge &amp; Cena</h3>
+          <h3>Lounge &amp; Cena</h3>
           <p>Jazz, funky y deep chill. El volumen acompaña la conversación — ideal para
              restaurante, tardeo de coctelería o tarde tranquila.</p>
         </div>
       </div>
       <div class="formato">
-        <img src="formato-sunset.jpg" alt="Set Sunset — la hora dorada">
+        <img src="https://vanegasdj.github.io/epk/formato-sunset.jpg" alt="Set Sunset — la hora dorada">
         <div class="cuerpo">
-          <h3>🌅 Set Sunset</h3>
+          <h3>Set Sunset</h3>
           <p>La hora dorada. Apertura elegante cuando la ciudad enciende las luces —
              el momento que el cliente fotografía y comparte.</p>
         </div>
       </div>
       <div class="formato">
-        <img src="formato-rooftop.jpg" alt="Set Rooftop — deep house con curva de energía, máx 126 BPM">
+        <img src="https://vanegasdj.github.io/epk/formato-rooftop.jpg" alt="Set Rooftop — deep house con curva de energía, máx 126 BPM">
         <div class="cuerpo">
-          <h3>🌃 Set Rooftop</h3>
+          <h3>Set Rooftop</h3>
           <p>La noche completa: deep house con curva de energía que sube con las horas.
              Elegante, nunca comercial — <span class="cifra">máx 126 BPM</span>.</p>
         </div>
       </div>
     </div>
     <p class="nota">+ Clases de DJ con método propio, de lunes a martes.</p>
+  </section>
+
+  <!-- ====== GÉNEROS & OCASIONES ====== -->
+  <section>
+    <h2>Géneros &amp; ocasiones</h2>
+    <p>Una sola biblioteca que cubre todo el día de tu local — del café de la mañana al pico de la noche.</p>
+    <div class="generos">
+      <div class="genero"><div class="g-e">🎷</div><div class="g-n">Jazz House</div><div class="g-o">Lounge &amp; cena · tardeo elegante</div></div>
+      <div class="genero"><div class="g-e">🌃</div><div class="g-n">Deep House</div><div class="g-o">Rooftop &amp; noche · la curva completa</div></div>
+      <div class="genero"><div class="g-e">🌅</div><div class="g-n">Soulful House</div><div class="g-o">Sunset &amp; coctel · hora dorada</div></div>
+      <div class="genero"><div class="g-e">✨</div><div class="g-n">Nu Disco · Funky</div><div class="g-o">Warm-up con energía retro</div></div>
+      <div class="genero"><div class="g-e">☕</div><div class="g-n">Jazzy Deep · Lo-Fi</div><div class="g-o">Coffee &amp; brunch · tarde tranquila</div></div>
+      <div class="genero"><div class="g-e">🥂</div><div class="g-n">Chillout</div><div class="g-o">Pool party &amp; afterwork</div></div>
+    </div>
   </section>
 
   <!-- ====== LA CURVA / EL MÉTODO ====== -->
@@ -225,49 +418,64 @@
        Transiciones limpias, cero saltos de energía. Una noche con dirección, no un playlist.</p>
   </section>
 
-  <!-- ====== VISUALES ====== -->
-  <section>
-    <h2>La noche también se ve</h2>
-    <p><strong>Diferencial único en Medellín:</strong> junto al set viajan mis visuales
-       reactivas al audio — en la pantalla del local gira el logo y el nombre de TU sitio,
-       sincronizados con la música. La noche se ve tan bien como suena, y tu marca viaja
-       en cada foto y cada video que el cliente sube.</p>
-  </section>
-
-  <!-- ====== ESCUCHA ====== -->
-  <section>
-    <h2>Escucha — set demo</h2>
-    <div class="embeds">
-      <div id="yt-slot"></div>
-      <iframe width="100%" height="220" scrolling="no" frameborder="no" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fvanegasdjco&color=%23ffd166&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false"
-        loading="lazy"></iframe>
-    </div>
-    <p class="nota">También en <a href="https://soundcloud.com/vanegasdjco" style="color:var(--oro)">SoundCloud</a>
-      y <a href="https://www.youtube.com/@VanegasDj" style="color:var(--oro)">YouTube @VanegasDj</a>.</p>
-  </section>
-
   <!-- ====== REDES ====== -->
   <section>
     <h2>Redes &amp; canales</h2>
     <div class="social-grid">
-      <a href="https://www.instagram.com/vanegasdj.co/" target="_blank" class="social-btn">Instagram</a>
-      <a href="https://soundcloud.com/vanegasdjco" target="_blank" class="social-btn">SoundCloud</a>
-      <a href="https://www.youtube.com/@VanegasDj" target="_blank" class="social-btn">YouTube</a>
-      <a href="https://www.tiktok.com/@vanegasdj" target="_blank" class="social-btn">TikTok</a>
+      <a href="https://www.instagram.com/vanegasdj.co/" target="_blank" rel="noopener" class="btn-moka">Instagram</a>
+      <a href="https://soundcloud.com/vanegasdjco" target="_blank" rel="noopener" class="btn-moka">SoundCloud</a>
+      <a href="https://www.youtube.com/@VanegasDj" target="_blank" rel="noopener" class="btn-moka">YouTube</a>
+      <a href="https://www.tiktok.com/@vanegasdj" target="_blank" rel="noopener" class="btn-moka">TikTok</a>
     </div>
   </section>
 
-  <!-- ====== RIDER ====== -->
+  <!-- ====== EQUIPO ====== -->
   <section>
-    <h2>Equipo &amp; rider (lo que llevo)</h2>
-    <ul class="rider">
-      <li>Controladora Pioneer DDJ-SR con <strong>Serato DJ Pro</strong></li>
-      <li>Monitores de audio y cableado propio</li>
-      <li>Visuales reactivas + logo del local en pantalla (si hay pantalla o proyector)</li>
-      <li>Biblioteca curada: cientos de tracks deep house organizados por energía y tonalidad</li>
-      <li>Montaje ágil en 30 minutos, puntualidad y trato impecable con el equipo del local</li>
-    </ul>
+    <h2>El equipo que llega a tu local</h2>
+    <div class="equipo">
+      <img src="https://vanegasdj.github.io/epk/foto.jpg" alt="Cabina Vanegas DJ — Pioneer DDJ-SR con Serato DJ Pro y luces">
+      <ul class="rider">
+        <li>Controladora <strong>Pioneer DDJ-SR</strong> + <strong>Serato DJ Pro</strong></li>
+        <li>Monitores de audio y cableado propio</li>
+        <li>Biblioteca curada: cientos de tracks organizados por energía y tonalidad</li>
+        <li>Montaje ágil en 30 minutos, puntualidad y trato impecable</li>
+      </ul>
+    </div>
+    <div class="equipo-tags">
+      <span class="badge">Pioneer DDJ-SR</span>
+      <span class="badge">Serato DJ Pro</span>
+      <span class="badge">Montaje 30 min</span>
+    </div>
+  </section>
+
+  <!-- ====== PLANES & PRECIOS ====== -->
+  <section class="no-print">
+    <h2>Planes &amp; inversión</h2>
+    <p>Sets de hasta <strong>5 horas</strong> con curva de energía — transparencia desde el
+       primer clic: eliges el formato, conversamos los detalles y tu noche queda lista.</p>
+    <div class="planes">
+      <div class="plan">
+        <h3>🌅 Lounge &amp; Cena</h3>
+        <div class="precio"><span class="desde">desde</span>$300.000</div>
+        <p>2-3 h · jazz, funky &amp; deep chill<br>el volumen acompaña la conversación</p>
+      </div>
+      <div class="plan">
+        <h3>🌇 Set Sunset</h3>
+        <div class="precio"><span class="desde">desde</span>$300.000</div>
+        <p>2-3 h · la hora dorada<br>el momento que se fotografía</p>
+      </div>
+      <div class="plan">
+        <h3>🌃 Set Rooftop</h3>
+        <div class="precio"><span class="desde">desde</span>$300.000</div>
+        <p><strong>5 horas</strong> · la noche completa<br>curva de energía de la mano</p>
+      </div>
+      <div class="plan">
+        <h3>⭐ Residencia mensual</h3>
+        <div class="precio">Especial</div>
+        <p>El DJ fijo de tu local<br>4 fechas al mes · precio preferencial</p>
+      </div>
+    </div>
+    <p class="nota">Inversión de referencia COP — se ajusta a tu espacio y horario. Conversamos directo por WhatsApp.</p>
   </section>
 
   <!-- ====== CTA ====== -->
@@ -276,27 +484,68 @@
     <p>Residencias mensuales, eventos únicos, bodas y corporativos. Cuéntame tu sitio,
        la fecha y el horario — y en minutos te devuelvo la propuesta completa con la
        curva de energía diseñada para tu espacio. <strong>El trato se conversa directo, sin intermediarios.</strong></p>
-    <a class="btn-wa" href="https://wa.me/573008543156?text=Hola%20Vanegas%20DJ%20%F0%9F%8E%A7%20Vengo%20de%20tu%20EPK.%20Quiero%20cotizar%20un%20set." target="_blank">
-      📲 Cotizar por WhatsApp
+    <a class="btn-wa" href="https://wa.me/573008543156?text=Hola%20Vanegas%20DJ%20%F0%9F%8E%A7%20Vengo%20de%20tu%20EPK.%20Quiero%20cotizar%20un%20set." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Cotizar por WhatsApp
     </a>
     <div class="fila-btns">
-      <a class="btn-oro" href="https://www.instagram.com/vanegasdj.co/" target="_blank">Instagram @vanegasdj.co</a>
-      <a class="btn-oro" href="https://www.youtube.com/@VanegasDj" target="_blank">Sets en YouTube</a>
+      <a class="btn-moka" href="https://www.instagram.com/vanegasdj.co/" target="_blank" rel="noopener">Instagram @vanegasdj.co</a>
+      <a class="btn-moka" href="https://www.youtube.com/@VanegasDj" target="_blank" rel="noopener">Sets en YouTube</a>
     </div>
   </section>
 
   <footer>Vanegas DJ · Medellín · vanegasdj.github.io/epk</footer>
 </div>
 
+<!-- ====== SELECTOR DE TEMA (quitar o dejar al publicar) ====== -->
+<div class="tema-switch no-print">
+  <span>Tema</span>
+  <button type="button" data-tema="verde" id="btnVerde">● Verde</button>
+  <button type="button" data-tema="azul" id="btnAzul">● Azul</button>
+</div>
+
 <script>
   /* ====== VIDEO DESTACADO DE YOUTUBE ======
      Pega el ID de tu mejor set (el código después de watch?v=) */
-  const YOUTUBE_VIDEO_ID = "";
+  var YOUTUBE_VIDEO_ID = "Cjgm9u4OZlM";
 
+  /* ====== TEMA: verde (Mochakk) o azul ====== */
+  var TEMAS = { verde: "20cd17", azul: "2ab8ff" };
+  function temaActual() {
+    try { return localStorage.getItem("epk-tema") || "verde"; } catch (e) { return "verde"; }
+  }
+  function construirSC(color) {
+    var marco = document.getElementById("sc-marco");
+    if (!marco) return;
+    var url = "https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fvanegasdjco"
+      + "&color=%23" + color + "&auto_play=false&hide_related=true&show_comments=false"
+      + "&show_user=true&show_reposts=false&show_teaser=false&visual=false";
+    marco.innerHTML = '<iframe width="100%" height="220" scrolling="no" frameborder="no" '
+      + 'allow="autoplay" src="' + url + '" loading="lazy" title="Vanegas DJ en SoundCloud"></iframe>';
+  }
+  function aplicarTema(t, guardar) {
+    document.documentElement.classList.toggle("tema-azul", t === "azul");
+    var btns = document.querySelectorAll(".tema-switch button");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle("activo", btns[i].getAttribute("data-tema") === t);
+    }
+    if (guardar) { try { localStorage.setItem("epk-tema", t); } catch (e) {} }
+    construirSC(TEMAS[t]);
+  }
   (function () {
-    const slot = document.getElementById("yt-slot");
+    var btns = document.querySelectorAll(".tema-switch button");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        aplicarTema(this.getAttribute("data-tema"), true);
+      });
+    }
+    aplicarTema(temaActual(), false);
+  })();
+
+  /* ====== SLOT DE YOUTUBE ====== */
+  (function () {
+    var slot = document.getElementById("yt-slot");
     if (YOUTUBE_VIDEO_ID && YOUTUBE_VIDEO_ID.length === 11) {
-      const frame = document.createElement("iframe");
+      var frame = document.createElement("iframe");
       frame.width = "560"; frame.height = "315";
       frame.src = "https://www.youtube.com/embed/" + YOUTUBE_VIDEO_ID;
       frame.title = "Vanegas DJ — set destacado";
@@ -306,14 +555,10 @@
       slot.appendChild(frame);
     } else {
       slot.innerHTML =
-        '<a href="https://www.youtube.com/@VanegasDj" target="_blank" ' +
-        'style="display:flex;align-items:center;gap:14px;background:rgba(255,209,102,.06);' +
-        'border:1px solid rgba(255,209,102,.3);border-radius:12px;padding:18px 20px;' +
-        'text-decoration:none;color:#fff;font-weight:bold;letter-spacing:1px;">' +
-        '<span style="font-size:26px">▶</span>' +
-        '<span>VER MIS SETS EN YOUTUBE<br>' +
-        '<small style="color:var(--oro);font-weight:normal">Set Sunset Lounge Rooftop · ' +
-        'Dark Luxury Deep House Live Set (Medellín)</small></span></a>';
+        '<a href="https://www.youtube.com/@VanegasDj" target="_blank" rel="noopener" class="btn-moka">' +
+        '<span class="grande">▶</span>' +
+        '<span>Ver mis sets en YouTube<br>' +
+        '<small>Set Sunset Lounge Rooftop · Dark Luxury Deep House Live Set (Medellín)</small></span></a>';
     }
   })();
 </script>
